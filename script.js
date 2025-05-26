@@ -91,7 +91,7 @@ resultVideo.addEventListener('ended', () => {
   // Si ya es el video final, no hagas nada
   if (resultVideo.src.includes('final.mp4')) {
     videoContainer.classList.add('hidden');
-    endScreen.classList.remove('hidden');
+      endScreen.style.display = "block"; 
   }
   resultVideo.src = 'videos/final.mp4';
   resultVideo.play();
@@ -103,6 +103,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById('popup').classList.add('hidden');
   videoContainer.classList.add('hidden');
   introContainer.classList.remove('hidden');
+  endScreen.style.display = "none"; 
 });
 
 // Cuando termina el intro, muestra la ruleta

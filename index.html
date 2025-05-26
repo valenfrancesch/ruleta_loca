@@ -15,14 +15,14 @@
     </div>
     <div class="container">
         <h2>Ruleta de los sentidos</h2>
+        <div class="arrow">▼</div>
         <div class="wheel" id="wheel">
-        <div class="segment" style="--i:0; background-color: #ff4d4d;">👃</div>
-        <div class="segment" style="--i:1; background-color: #ffa500;">👂</div>
-        <div class="segment" style="--i:2; background-color: #ffff66;">👀</div>
-        <div class="segment" style="--i:3; background-color: #66ff66;">👄</div>
-        <div class="segment" style="--i:4; background-color: #66ccff;">👌</div>
+            <div class="segment" style="--i:0; background-color: #ff4d4d;">👃</div>
+            <div class="segment" style="--i:1; background-color: #ffa500;">👂</div>
+            <div class="segment" style="--i:2; background-color: #ffff66;">👀</div>
+            <div class="segment" style="--i:3; background-color: #66ff66;">👄</div>
+            <div class="segment" style="--i:4; background-color: #66ccff;">👌</div>
         </div>
-        <div class="arrow">▲</div>
         <button id="spin">Girar</button>
         <p id="result"></p>
     </div>
@@ -37,6 +37,13 @@
 
   <div id="videoContainer" class="hidden">
     <video id="resultVideo" autoplay></video>
+  </div>
+
+  <div id="endScreen" class="hidden" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;z-index:10000;display:flex;justify-content:center;align-items:center;">
+    <div style="color:white;font-size:2.5rem;text-align:center;">
+      Ningún programador fue obligado a participar de esta experiencia. (?) <br>
+      Para más páginas web: valufrancesch@gmail.com
+    </div>
   </div>
 
    <audio id="spinSound" src="sounds/wheel_spin_audio.mp3" preload="auto"></audio>

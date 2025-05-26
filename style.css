@@ -42,7 +42,7 @@ body {
   align-items: flex-start;
   font-size: 2rem;
   /* Cada segmento se rota según su índice */
-  transform: rotate(calc(var(--i) * 72deg));
+    transform: rotate(calc(var(--i) * 72deg));
   /* Recorta el segmento en forma de cuña de 72 grados */
   clip-path: polygon(
     50% 50%,
@@ -51,11 +51,12 @@ body {
   );
    border-right: 2px solid #fff;
     font-size: 100px;
+
 }
 
 .arrow {
   font-size: 50px;
-  margin-top: -35px;
+  margin-bottom: -25px;
   position: relative;
   z-index: 1000;
 }

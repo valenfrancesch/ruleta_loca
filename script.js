@@ -9,32 +9,49 @@ const videoContainer = document.getElementById("videoContainer");
 const resultVideo = document.getElementById("resultVideo");
 const introContainer = document.getElementById("introContainer");
 const introVideo = document.getElementById("introVideo");
-
+const endScreen = document.getElementById("endScreen");
 
 const options = ["olfato", "oido", "vista", "gusto", "tacto"];
 let currentIndex = null;
 let repeatedSpin = false;
 
 function spinWheel() {
-  const degree = 1800 + Math.floor(Math.random() * 360);
-  const segment = 360 / options.length;
+  const randomDegree = Math.floor(Math.random() * 360);
+  const degree = 1800 + randomDegree; // 5 vueltas + un extra aleatorio
+
+  // Resetea transición y rotación antes de girar
+  wheel.style.transition = "none";
+  wheel.style.transform = "rotate(0deg)";
+  void wheel.offsetWidth; // Fuerza reflow
+
   wheel.style.transition = "transform 5s ease-out";
   wheel.style.transform = `rotate(${degree}deg)`;
 
   sound.currentTime = 0;
   sound.play();
 
-  const actualDeg = degree % 360;
-  currentIndex = Math.floor((360 - actualDeg + segment / 2) % 360 / segment);
-
   setTimeout(() => {
-    sound.pause();
+/*     const segment = 72;
+    const finalDeg = (degree % 360 + 360) % 360;
+    const adjustedDeg = (finalDeg + 180) % 360; 
+    const index = Math.floor(adjustedDeg / segment) % options.length; */
+
+    const finalDeg = 360 - randomDegree + (72/2) 
+    const listDeg = [0, 72, 144, 216, 288];
+    const index = listDeg.findIndex(deg => {
+        return finalDeg >= deg && finalDeg < (deg + 72);
+    })
+    //const options = ["olfato" (0), "oido"(1), "vista"(2), "gusto"(3), "tacto"(4)];
+    currentIndex = index;
+    console.log("Current index:", currentIndex, options[currentIndex]);
+
     if (!repeatedSpin) {
-      popup.classList.remove("hidden");
+        popup.classList.remove("hidden");
     } else {
-      showVideo();
+        showVideo();
     }
-  }, 5000);
+    }, 5000);
+
 }
 
 spinBtn.addEventListener("click", () => {
@@ -59,6 +76,7 @@ spinAgainBtn.addEventListener("click", () => {
 
 function showVideo() {
   const selected = options[currentIndex];
+  console.log("Selected option:", selected);
   result.textContent = `¡Elegiste: ${selected.toUpperCase()}!`;
   resultVideo.src = `videos/${selected}.mp4`;
   // Oculta todo menos el video
@@ -71,7 +89,10 @@ function showVideo() {
 
 resultVideo.addEventListener('ended', () => {
   // Si ya es el video final, no hagas nada
-  if (resultVideo.src.includes('final.mp4')) return;
+  if (resultVideo.src.includes('final.mp4')) {
+    videoContainer.classList.add('hidden');
+    endScreen.classList.remove('hidden');
+  }
   resultVideo.src = 'videos/final.mp4';
   resultVideo.play();
 });
